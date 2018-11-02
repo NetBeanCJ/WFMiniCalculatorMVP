@@ -12,86 +12,61 @@ namespace WFMiniCalculatorMVP
 {
     public partial class Calculator : Form
     {
+
+
+
+        Double value = 0;
+        String operation = "";
+        bool operation_pressed = false; 
+
         public Calculator()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Calculator_Load(object sender, EventArgs e)
         {
 
         }
 
-      
-
-        private void btnNo1_Click(object sender, EventArgs e)
+        private void button_Click(object sender, EventArgs e)
         {
+            if ((result.Text == "0")|| (operation_pressed))
+                result.Clear();
 
+            Button b = (Button)sender;
+            result.Text = result.Text + b.Text; 
         }
 
-        private void btnNo2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            result.Text = "0";
         }
 
-        private void btnNo3_Click(object sender, EventArgs e)
+        private void operator_click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnNo4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNo0_Click(object sender, EventArgs e)
-        {
-
+            Button b = (Button)sender;
+            operation = b.Text;
+            value = Double.Parse(result.Text);
+            operation_pressed = true; 
         }
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
+            switch (operation)
+            {
+                case "+":
+                    result.Text = (value + Double.Parse(result.Text)).ToString();
+                    break;
 
-        }
+                case "*":
+                    result.Text = (value * Double.Parse(result.Text)).ToString();
+                    break;
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMultiply_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtResult_TextChanged(object sender, EventArgs e)
-        {
-
+                default:
+                    break; 
+            }
+            operation_pressed = false;
         }
     }
 }
